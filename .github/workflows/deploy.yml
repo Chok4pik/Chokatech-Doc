@@ -3,7 +3,7 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches:
-      - gh-pages # La branche depuis laquelle vous déclenchez le déploiement
+      - main # La branche depuis laquelle vous déclenchez le déploiement
 
 jobs:
   build:
