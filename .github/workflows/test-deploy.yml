@@ -3,7 +3,7 @@ name: Test deployment
 on:
   pull_request:
     branches:
-      - main # Déclenche le workflow lors d'une demande de tirage sur la branche main
+      - gh-pages # Déclenche le workflow lors d'une demande de tirage sur la branche main
 
 jobs:
   test-deploy:
