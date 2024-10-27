@@ -1,0 +1,155 @@
+/* page-garde.module.css */
+
+/* Styles principaux du conteneur */
+body {
+    overflow: hidden; /* Empêche le défilement de la page */
+    margin: 0; /* Supprime la marge par défaut du body */
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh; /* Assurer que le conteneur prend toute la hauteur de la fenêtre */
+    position: relative; /* Position relative pour le conteneur principal */
+    overflow: hidden; /* Cache les débordements, notamment le flou */
+}
+
+/* Section avatar */
+.avatarSection {
+    padding: 2rem; /* Réduire le padding pour optimiser l'espace */
+}
+
+.avatar--vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.avatarPhoto {
+    border: 2px solid;
+    border-radius: 50%;
+    border-color: var(--ifm-color-primary);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    width: 150px; /* Réduire la taille de l'image */
+    height: 150px; /* Maintenir la taille de l'image */
+}
+
+.avatarPhoto:hover {
+    transform: scale(1.05); /* Réduire l'échelle du survol */
+}
+
+.avatar__intro {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.avatar__name {
+    font-weight: bold;
+}
+
+.avatar__subtitle {
+    font-size: 1rem;
+    color: #555;
+    margin-top: 0.5rem; /* Ajout d'espace entre le nom et le sous-titre */
+}
+
+.welcomeSection h1 {
+    font-size: 2.5rem; /* Augmentation de la taille du titre */
+    margin-bottom: 1.5rem;
+    color: var(--ifm-color-primary); /* Couleur primaire pour le titre */
+}
+
+.buttons .button {
+    margin-top: 1rem;
+}
+
+/* Styles Responsives */
+@media (max-width: 768px) {
+    .welcomeSection h1 {
+        font-size: 2rem; /* Réduire la taille du titre sur petits écrans */
+    }
+
+    .avatar__name {
+        font-size: 1.5rem; /* Réduire la taille du nom */
+    }
+
+    .avatar__subtitle {
+        font-size: 0.9rem; /* Réduire la taille du sous-titre */
+    }
+
+    .avatarPhoto {
+        width: 150px; /* Ajustement de la taille de l'image pour les petits écrans */
+        height: 150px; /* Maintenir la taille de l'image */
+    }
+
+    .avatarSection {
+        padding: 1.5rem; /* Réduire le padding pour les petits écrans */
+    }
+}
+
+@media (max-width: 480px) {
+    .welcomeSection h1 {
+        font-size: 1.5rem; /* Réduire encore la taille du titre */
+    }
+
+    .avatar__name {
+        font-size: 1.2rem; /* Réduire encore la taille du nom */
+    }
+
+    .avatar__subtitle {
+        font-size: 0.8rem; /* Réduire encore la taille du sous-titre */
+    }
+
+    .avatarPhoto {
+        width: 120px; /* Réduire la taille de l'image pour les très petits écrans */
+        height: 120px; /* Maintenir la taille de l'image */
+    }
+
+    .avatarSection {
+        padding: 1rem; /* Réduire le padding pour les très petits écrans */
+    }
+}
+
+/* Rectangle englobant tous les éléments */
+.rectangle {
+    border: 2px solid #16213E; /* Bordure en bleu nuit */
+    border-radius: 10px;       /* Coins arrondis */
+    padding: 20px;             /* Espace intérieur */
+    background-color: rgba(255, 255, 255, 0.5); /* Augmentez l'opacité (moins transparent) */
+    backdrop-filter: blur(10px); /* Flou de 10 pixels */
+    box-shadow: 0 0 5px var(--ifm-color-primary), /* Lumière néon turquoise */
+                0 0 10px var(--ifm-color-primary),
+                0 0 15px var(--ifm-color-primary),
+                0 0 20px var(--ifm-color-primary); /* Ombres portées pour effet néon */
+    max-width: 600px;          /* Largeur maximale du rectangle */
+    margin: 20px auto;         /* Centrer le rectangle */
+    text-align: center;        /* Centrer le texte à l'intérieur */
+    transition: box-shadow 0.3s ease; /* Transition pour le changement d'ombre */
+}
+
+.rectangle:hover {
+    box-shadow: 0 0 10px, /* Lumière néon rose au survol */
+                0 0 20px,
+                0 0 30px,
+                0 0 40px;
+}
+
+/* Style pour le fond */
+.mainContainer::before {
+    content: ""; /* Nécessaire pour créer le pseudo-élément */
+    position: absolute; /* Positionner absolument */
+    top: 0; /* Commence en haut */
+    left: 0; /* Commence à gauche */
+    right: 0; /* S'étend à droite */
+    bottom: 0; /* S'étend en bas */
+    background-image: url('./img/cyberpunk.jpg'); /* Chemin de votre image de fond */
+    background-size: cover; /* Couvre toute la zone */
+    background-position: center; /* Centre l'image */
+    filter: blur(8px); /* Applique le flou à l'image de fond */
+    z-index: -1; /* Place derrière le contenu */
+}
+

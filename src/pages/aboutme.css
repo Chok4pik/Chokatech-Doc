@@ -1,0 +1,211 @@
+/* src/components/ProfileCard.css */
+
+.page-container {
+  display: flex;               /* Active le flexbox */
+  justify-content: center;     /* Centre horizontalement */
+  align-items: center;         /* Centre verticalement */
+  height: 100vh;               /* Hauteur complète de la fenêtre */
+  position: relative;          /* Position relative pour l'image de fond */
+  overflow: hidden;            /* Cache le débordement */
+}
+.page-container::before {
+  content: "";                 /* Nécessaire pour créer le pseudo-élément */
+  position: absolute;          /* Positionner absolument */
+  top: 0;                      /* Commence en haut */
+  left: 0;                     /* Commence à gauche */
+  right: 0;                    /* S'étend à droite */
+  bottom: 0;                   /* S'étend en bas */
+  background-image: url('../../static/img/bluesky.jpg'); /* Image de fond */
+  background-size: cover;      /* Couvre toute la zone */
+  background-position: center; /* Centre l'image */
+  filter: blur(8px);           /* Applique le flou */
+  z-index: -1;                 /* Place derrière le contenu */
+  background-attachment: fixed; /* Fixe l'image de fond */
+}
+
+.card-container {
+  background-color: rgba(22, 33, 62, 0.8);  /* Couleur de fond de la carte (bleu nuit) avec transparence */
+  border: 2px solid #FFFFFF;  /* Bordure de la carte en blanc */
+  border-radius: 8px;         /* Arrondit les coins de la carte */
+  box-shadow: 0px 15px 30px -10px rgba(0, 0, 0, 0.75); /* Ombre pour la profondeur */
+  color: #FFFFFF;             /* Couleur de texte blanche */
+  padding: 40px;              /* Remplissage de la carte */
+  position: relative;
+  width: 700px;               /* Largeur augmentée */
+  max-width: 90%;             /* Largeur maximale */
+  text-align: center;
+  margin: 20px;               /* Espace autour de la carte */
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Animation pour le mouvement et l'ombre */
+}
+
+
+
+
+.card-container:hover {
+  animation: move 0.3s ease forwards, colorChange 0.3s ease forwards; /* Animation de mouvement et de couleur */
+  box-shadow: 0px 30px 60px -10px rgba(0, 0, 0, 0.75); /* Ombre améliorée au survol */
+}
+
+/* Animation définissant le mouvement */
+@keyframes move {
+  0% {
+    transform: translate(0px, 0px); /* Position initiale */
+  }
+  25% {
+    transform: translate(10px, -10px); /* Déplacement vers le haut à droite */
+  }
+  50% {
+    transform: translate(-10px, 10px); /* Déplacement vers le bas à gauche */
+  }
+  75% {
+    transform: translate(-10px, -10px); /* Déplacement vers le haut à gauche */
+  }
+  100% {
+    transform: translate(10px, 10px); /* Déplacement vers le bas à droite */
+  }
+}
+
+/* Animation définissant le changement de couleur */
+@keyframes colorChange {
+  0% {
+    background-color: rgba(22, 33, 62, 0.8); /* Couleur initiale */
+    border-color: #FFFFFF; /* Couleur de bordure initiale */
+    color: #FFFFFF; /* Couleur de texte initiale */
+  }
+  100% {
+    background-color: rgba(0, 0, 0, 0.8); /* Couleur noir pendant le mouvement */
+    border-color: #FFFFFF; /* Couleur de bordure en blanc */
+    color: #FFFFFF; /* Couleur de texte blanche */
+  }
+}
+
+.card-container .pro {
+  color: #16213E;              /* Texte de la badge en bleu nuit */
+  background-color: #FFFFFF;   /* Fond blanc */
+  border-radius: 3px;          /* Coins arrondis pour la badge */
+  font-size: 16px;             /* Taille de police légèrement augmentée */
+  font-weight: bold;
+  padding: 5px 10px;           /* Ajustement du remplissage */
+  position: absolute;
+  top: 30px;
+  left: 30px;
+}
+
+.card-container .round {
+  border: 2px solid #FFFFFF;   /* Bordure en blanc */
+  border-radius: 50%;          /* Arrondit complètement l'image */
+  padding: 10px;               /* Augmente le remplissage pour l'image */
+  width: 120px;                /* Largeur agrandie pour l'image */
+  height: 120px;               /* Hauteur agrandie pour l'image */
+}
+
+button.primary {
+  background-color: #16213E;   /* Fond bleu nuit pour le bouton */
+  border: 2px solid #FFFFFF;   /* Bordure en blanc */
+  border-radius: 5px;          /* Bordure plus douce */
+  color: #FFFFFF;              /* Couleur de texte blanche */
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  padding: 12px 30px;          /* Augmente le remplissage pour des boutons plus grands */
+  margin: 8px;                 /* Plus d'espacement entre les boutons */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Transition pour les effets de survol des boutons */
+}
+
+button.primary:hover {
+  background-color: #000000;  /* Change la couleur de fond en noir au survol */
+  color: #FFFFFF;             /* Couleur de texte blanche */
+  border-color: #FFFFFF;      /* Bordure en blanc */
+}
+
+button.primary.ghost {
+  background-color: #000000;  /* Couleur de fond noir pour le bouton CV */
+  color: #FFFFFF;             /* Couleur du texte blanche */
+  border: 2px solid #FFFFFF;  /* Bordure en blanc pour le bouton CV */
+  border-radius: 5px;         /* Arrondir les coins du bouton */
+}
+
+button.primary.ghost:hover {
+  background-color: #16213E;  /* Change la couleur de fond en bleu nuit au survol */
+}
+
+button.primary:hover.ghost {
+  border-color: #FFFFFF;      /* Bordure en blanc au survol */
+}
+
+/* Ajout d'un style amélioré pour la section compétences */
+.skills {
+  background-color: #16213E;  /* Nouveau fond bleu nuit pour la section compétences */
+  border-radius: 8px;         /* Arrondit les coins de la section compétences */
+  text-align: left;
+  padding: 20px;              /* Remplissage de la section compétences */
+  margin-top: 30px;           /* Marge en haut pour séparer la section */
+}
+
+.skills h6 {
+  color: #FFFFFF;             /* Couleur du titre des compétences en blanc */
+}
+
+.skills ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skills ul li {
+  display: inline-block;      /* Affiche les éléments de compétences en ligne */
+  font-size: 14px;            /* Augmente la taille de police */
+  margin: 0 10px 10px 0;      /* Plus d'espace entre les éléments de compétence */
+  padding: 8px;               /* Augmente le remplissage pour les éléments de compétence */
+  background-color: #000000;  /* Fond noir pour chaque élément de compétence */
+  color: #FFFFFF;             /* Couleur de texte blanche pour les compétences */
+  border-radius: 5px;         /* Arrondit les coins des éléments de compétence */
+}
+
+.back-button {
+  position: absolute;             /* Positionnement absolu pour le placer */
+  top: 20px;                     /* Distance du haut de la page */
+  left: 20px;                    /* Distance de la gauche de la page */
+  background-color: #16213E;    /* Couleur de fond bleu nuit */
+  color: #FFFFFF;                /* Couleur de texte blanche */
+  border: 2px solid #FFFFFF;     /* Bordure blanche */
+  border-radius: 5px;            /* Coins arrondis */
+  padding: 10px 20px;            /* Remplissage pour le bouton */
+  font-family: Montserrat, sans-serif; /* Police du bouton */
+  font-weight: 500;              /* Épaisseur de la police */
+  cursor: pointer;               /* Curseur en main au survol */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Transition des styles au survol */
+}
+
+.back-button:hover {
+  background-color: #000000;     /* Change la couleur de fond en noir au survol */
+  color: #FFFFFF;                /* Couleur de texte blanche au survol */
+  border-color: #FFFFFF;         /* Bordure blanche au survol */
+}
+
+/* src/aboutme.css */
+
+/* src/aboutme.css */
+
+/* src/components/ProfileCard.css */
+
+/* Ajoutez ce style à votre fichier CSS */
+
+button.primary,
+button.primary.ghost {
+  cursor: pointer; /* Curseur en main pour les boutons */
+}
+
+button.primary:hover,
+button.primary.ghost:hover {
+  cursor: pointer; /* Assurez-vous que le curseur change également au survol */
+}
+
+.justified {
+  text-align: justify; /* Justifie le texte */
+  margin: 1em 0; /* Saut de ligne approprié */
+  white-space: pre-wrap; /* Préserve les espaces dans le texte */
+}
+
+.card-details p {
+  margin-bottom: 20px; /* Espace en bas des paragraphes */
+}
