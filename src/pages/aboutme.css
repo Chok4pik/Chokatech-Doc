@@ -1,148 +1,137 @@
-/* src/components/ProfileCard.css */
-
 .page-container {
-  display: flex;               /* Active le flexbox */
-  justify-content: center;     /* Centre horizontalement */
-  align-items: center;         /* Centre verticalement */
-  height: 100vh;               /* Hauteur complète de la fenêtre */
-  position: relative;          /* Position relative pour l'image de fond */
-  overflow: hidden;            /* Cache le débordement */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
 }
+
 .page-container::before {
-  content: "";                 /* Nécessaire pour créer le pseudo-élément */
-  position: absolute;          /* Positionner absolument */
-  top: 0;                      /* Commence en haut */
-  left: 0;                     /* Commence à gauche */
-  right: 0;                    /* S'étend à droite */
-  bottom: 0;                   /* S'étend en bas */
-  background-image: url('../../static/img/bluesky.jpg'); /* Image de fond */
-  background-size: cover;      /* Couvre toute la zone */
-  background-position: center; /* Centre l'image */
-  filter: blur(8px);           /* Applique le flou */
-  z-index: -1;                 /* Place derrière le contenu */
-  background-attachment: fixed; /* Fixe l'image de fond */
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../../static/img/bluesky.jpg');
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: -1;
+  background-attachment: fixed;
 }
 
 .card-container {
-  background-color: rgba(22, 33, 62, 0.8);  /* Couleur de fond de la carte (bleu nuit) avec transparence */
-  border: 2px solid #FFFFFF;  /* Bordure de la carte en blanc */
-  border-radius: 8px;         /* Arrondit les coins de la carte */
-  box-shadow: 0px 15px 30px -10px rgba(0, 0, 0, 0.75); /* Ombre pour la profondeur */
-  color: #FFFFFF;             /* Couleur de texte blanche */
-  padding: 40px;              /* Remplissage de la carte */
+  background-color: rgba(22, 33, 62, 0.8);
+  border: 2px solid #FFFFFF;
+  border-radius: 8px;
+  box-shadow: 0px 15px 30px -10px rgba(0, 0, 0, 0.75);
+  color: #FFFFFF;
+  padding: 40px;
   position: relative;
-  width: 700px;               /* Largeur augmentée */
-  max-width: 90%;             /* Largeur maximale */
+  width: 700px;
+  max-width: 90%;
   text-align: center;
-  margin: 20px;               /* Espace autour de la carte */
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Animation pour le mouvement et l'ombre */
+  margin: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, color 0.3s ease;
 }
-
-
-
 
 .card-container:hover {
-  animation: move 0.3s ease forwards, colorChange 0.3s ease forwards; /* Animation de mouvement et de couleur */
-  box-shadow: 0px 30px 60px -10px rgba(0, 0, 0, 0.75); /* Ombre améliorée au survol */
+  animation: move 0.3s ease forwards, colorChange 0.3s ease forwards;
+  box-shadow: 0px 30px 60px -10px rgba(0, 0, 0, 0.75);
 }
 
-/* Animation définissant le mouvement */
 @keyframes move {
   0% {
-    transform: translate(0px, 0px); /* Position initiale */
+    transform: translate(0px, 0px);
   }
   25% {
-    transform: translate(10px, -10px); /* Déplacement vers le haut à droite */
+    transform: translate(10px, -10px);
   }
   50% {
-    transform: translate(-10px, 10px); /* Déplacement vers le bas à gauche */
+    transform: translate(-10px, 10px);
   }
   75% {
-    transform: translate(-10px, -10px); /* Déplacement vers le haut à gauche */
+    transform: translate(-10px, -10px);
   }
   100% {
-    transform: translate(10px, 10px); /* Déplacement vers le bas à droite */
+    transform: translate(10px, 10px);
   }
 }
 
-/* Animation définissant le changement de couleur */
 @keyframes colorChange {
   0% {
-    background-color: rgba(22, 33, 62, 0.8); /* Couleur initiale */
-    border-color: #FFFFFF; /* Couleur de bordure initiale */
-    color: #FFFFFF; /* Couleur de texte initiale */
+    background-color: rgba(22, 33, 62, 0.8);
+    border-color: #FFFFFF;
+    color: #FFFFFF;
   }
   100% {
-    background-color: rgba(0, 0, 0, 0.8); /* Couleur noir pendant le mouvement */
-    border-color: #FFFFFF; /* Couleur de bordure en blanc */
-    color: #FFFFFF; /* Couleur de texte blanche */
+    background-color: rgba(0, 0, 0, 0.8);
+    border-color: #FFFFFF;
+    color: #FFFFFF;
   }
 }
 
 .card-container .pro {
-  color: #16213E;              /* Texte de la badge en bleu nuit */
-  background-color: #FFFFFF;   /* Fond blanc */
-  border-radius: 3px;          /* Coins arrondis pour la badge */
-  font-size: 16px;             /* Taille de police légèrement augmentée */
+  color: #16213E;
+  background-color: #FFFFFF;
+  border-radius: 3px;
+  font-size: 16px;
   font-weight: bold;
-  padding: 5px 10px;           /* Ajustement du remplissage */
+  padding: 5px 10px;
   position: absolute;
   top: 30px;
   left: 30px;
 }
 
 .card-container .round {
-  border: 2px solid #FFFFFF;   /* Bordure en blanc */
-  border-radius: 50%;          /* Arrondit complètement l'image */
-  padding: 10px;               /* Augmente le remplissage pour l'image */
-  width: 120px;                /* Largeur agrandie pour l'image */
-  height: 120px;               /* Hauteur agrandie pour l'image */
+  border: 2px solid #FFFFFF;
+  border-radius: 50%;
+  padding: 10px;
+  width: 120px;
+  height: 120px;
 }
 
 button.primary {
-  background-color: #16213E;   /* Fond bleu nuit pour le bouton */
-  border: 2px solid #FFFFFF;   /* Bordure en blanc */
-  border-radius: 5px;          /* Bordure plus douce */
-  color: #FFFFFF;              /* Couleur de texte blanche */
+  background-color: #16213E;
+  border: 2px solid #FFFFFF;
+  border-radius: 5px;
+  color: #FFFFFF;
   font-family: Montserrat, sans-serif;
   font-weight: 500;
-  padding: 12px 30px;          /* Augmente le remplissage pour des boutons plus grands */
-  margin: 8px;                 /* Plus d'espacement entre les boutons */
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Transition pour les effets de survol des boutons */
+  padding: 12px 30px;
+  margin: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 button.primary:hover {
-  background-color: #000000;  /* Change la couleur de fond en noir au survol */
-  color: #FFFFFF;             /* Couleur de texte blanche */
-  border-color: #FFFFFF;      /* Bordure en blanc */
+  background-color: #000000;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
 }
 
 button.primary.ghost {
-  background-color: #000000;  /* Couleur de fond noir pour le bouton CV */
-  color: #FFFFFF;             /* Couleur du texte blanche */
-  border: 2px solid #FFFFFF;  /* Bordure en blanc pour le bouton CV */
-  border-radius: 5px;         /* Arrondir les coins du bouton */
+  background-color: #000000;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 5px;
 }
 
 button.primary.ghost:hover {
-  background-color: #16213E;  /* Change la couleur de fond en bleu nuit au survol */
+  background-color: #16213E;
 }
 
-button.primary:hover.ghost {
-  border-color: #FFFFFF;      /* Bordure en blanc au survol */
-}
-
-/* Ajout d'un style amélioré pour la section compétences */
 .skills {
-  background-color: #16213E;  /* Nouveau fond bleu nuit pour la section compétences */
-  border-radius: 8px;         /* Arrondit les coins de la section compétences */
+  background-color: #16213E;
+  border-radius: 8px;
   text-align: left;
-  padding: 20px;              /* Remplissage de la section compétences */
-  margin-top: 30px;           /* Marge en haut pour séparer la section */
+  padding: 20px;
+  margin-top: 30px;
 }
 
 .skills h6 {
-  color: #FFFFFF;             /* Couleur du titre des compétences en blanc */
+  color: #FFFFFF;
 }
 
 .skills ul {
@@ -152,60 +141,52 @@ button.primary:hover.ghost {
 }
 
 .skills ul li {
-  display: inline-block;      /* Affiche les éléments de compétences en ligne */
-  font-size: 14px;            /* Augmente la taille de police */
-  margin: 0 10px 10px 0;      /* Plus d'espace entre les éléments de compétence */
-  padding: 8px;               /* Augmente le remplissage pour les éléments de compétence */
-  background-color: #000000;  /* Fond noir pour chaque élément de compétence */
-  color: #FFFFFF;             /* Couleur de texte blanche pour les compétences */
-  border-radius: 5px;         /* Arrondit les coins des éléments de compétence */
+  display: inline-block;
+  font-size: 14px;
+  margin: 0 10px 10px 0;
+  padding: 8px;
+  background-color: #000000;
+  color: #FFFFFF;
+  border-radius: 5px;
 }
 
 .back-button {
-  position: absolute;             /* Positionnement absolu pour le placer */
-  top: 20px;                     /* Distance du haut de la page */
-  left: 20px;                    /* Distance de la gauche de la page */
-  background-color: #16213E;    /* Couleur de fond bleu nuit */
-  color: #FFFFFF;                /* Couleur de texte blanche */
-  border: 2px solid #FFFFFF;     /* Bordure blanche */
-  border-radius: 5px;            /* Coins arrondis */
-  padding: 10px 20px;            /* Remplissage pour le bouton */
-  font-family: Montserrat, sans-serif; /* Police du bouton */
-  font-weight: 500;              /* Épaisseur de la police */
-  cursor: pointer;               /* Curseur en main au survol */
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Transition des styles au survol */
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #16213E;
+  color: #FFFFFF;
+  border: 2px solid #FFFFFF;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 .back-button:hover {
-  background-color: #000000;     /* Change la couleur de fond en noir au survol */
-  color: #FFFFFF;                /* Couleur de texte blanche au survol */
-  border-color: #FFFFFF;         /* Bordure blanche au survol */
+  background-color: #000000;
+  color: #FFFFFF;
+  border-color: #FFFFFF;
 }
-
-/* src/aboutme.css */
-
-/* src/aboutme.css */
-
-/* src/components/ProfileCard.css */
-
-/* Ajoutez ce style à votre fichier CSS */
 
 button.primary,
 button.primary.ghost {
-  cursor: pointer; /* Curseur en main pour les boutons */
+  cursor: pointer;
 }
 
 button.primary:hover,
 button.primary.ghost:hover {
-  cursor: pointer; /* Assurez-vous que le curseur change également au survol */
+  cursor: pointer;
 }
 
 .justified {
-  text-align: justify; /* Justifie le texte */
-  margin: 1em 0; /* Saut de ligne approprié */
-  white-space: pre-wrap; /* Préserve les espaces dans le texte */
+  text-align: justify;
+  margin: 1em 0;
+  white-space: pre-wrap;
 }
 
 .card-details p {
-  margin-bottom: 20px; /* Espace en bas des paragraphes */
+  margin-bottom: 20px;
 }

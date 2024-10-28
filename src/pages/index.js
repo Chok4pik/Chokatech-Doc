@@ -18,29 +18,28 @@ export default function Home() {
                   className={clsx('avatar__photo', styles.avatarPhoto)}
                   src={profileImage}
                   alt="icespice"
-                  style={{ width: '300px', height: '300px' }} // Ajustez la taille ici
+                  style={{ width: '300px', height: '300px' }}
                 />
               </Link>
               <div className="avatar__intro">
                 <div
-                  className="avatar__name"
-                  style={{ fontSize: '2rem', marginTop: '20px', color: 'var(--ifm-color-primary)' }} // Couleur mise à jour
+                  className={styles.avatarName}
                 >
                   Chokatech
                 </div>
                 <div style={{ marginBottom: '10px' }} /> {/* Espace supplémentaire */}
-                <small className="avatar__subtitle" style={{ color: 'var(--ifm-color-primary)' }}> {/* Couleur mise à jour */}
+                <small className={styles.avatarSubtitle}>
                   Bienvenue sur mon site dédié à de la documentation.
                 </small>
               </div>
             </div>
           </section>
           <section className={styles.welcomeSection}>
-            <h1 style={{ color: 'var(--ifm-color-primary)' }}>Prêt à vous lancer ?</h1> {/* Couleur mise à jour */}
+            <h1>Prêt à vous lancer ?</h1>
             <div className={styles.buttons}>
               <Link
                 className="button button--primary button--lg"
-                to="/Chokatech-Doc/docs/Introduction" // Utilisez 'to' avec Link de Docusaurus
+                to="/Chokatech-Doc/docs/Introduction"
               >
                 Commencer
               </Link>

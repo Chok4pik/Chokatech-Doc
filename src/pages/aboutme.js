@@ -30,7 +30,7 @@ const ProfileCard = () => {
             Etudiant en 2 année de BTS SIO option SISR
           </p>
           <div className="buttons">
-            <button className="primary">Message</button>
+            <button className="primary">Prtfolio</button>
             <button className="primary ghost">CV</button>
           </div>
           <div className="skills">
@@ -43,7 +43,7 @@ const ProfileCard = () => {
               Pour en savoir plus sur mon profil, n'hésitez pas à consulter mon CV. Si vous êtes intéressé par mon parcours et mes compétences. De plus, si vous connaissez des personnes qui cherchent des stagiaires, n'hésitez pas à partager cette information autour de vous. 
 
               <br /><br />
-              Cela m'aiderait beaucoup. Merci !
+              Cela m'aiderait beaucoup. Merci !!!
             </p>
           </div>
         </div>

@@ -81,6 +81,7 @@ const config = {
           alt: 'My Site Logo',
           src: 'img/choco1.png',
         },
+        
         items: [
           {
             type: 'docSidebar',
@@ -88,7 +89,8 @@ const config = {
             position: 'left',
             label: 'Tutoriels',
           },
-          {to: '/blog', label: 'Blog', position: 'left'},
+          {to: '/blog', label: 'Articles', position: 'left'},
+          { to: '/Chokatech-Doc/aboutme', label: 'À propos de moi', position: 'left' }, // Lien vers la page About 
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',

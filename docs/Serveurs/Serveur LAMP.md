@@ -147,6 +147,14 @@ Test de connexion à la base de donées :
 ```bash
 mariadb -u root -p
 ```
+
+### Configuration de MariaDB/MySQL pour accepter les connexion à distance : 
+```bash
+vim /etc/mysql/mariadb.conf.d/50-server.cnf
+```
+![sucees phpinfo](./img/bind.png)
+
+
 ### Installation de PHP
 
 Installation de php : 
