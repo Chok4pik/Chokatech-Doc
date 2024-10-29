@@ -133,23 +133,6 @@ Quitter MariaDB :
 EXIT;
 ```
 
-### Commandes Indispensables pour Gérer une Base de Données et ses Utilisateurs
-
-| Commande                          | Description                                                                                 |
-|-----------------------------------|---------------------------------------------------------------------------------------------|
-| `sudo mysql -u root -p`           | Se connecter à MySQL en tant que root                                                       |
-| `CREATE DATABASE nom_de_bdd;`     | Créer une nouvelle base de données                                                          |
-| `SHOW DATABASES;`                 | Lister toutes les bases de données                                                          |
-| `USE nom_de_bdd;`                 | Sélectionner une base de données pour travailler dessus                                     |
-| `CREATE USER 'utilisateur'@'localhost' IDENTIFIED BY 'mot_de_passe';` | Créer un nouvel utilisateur MySQL                                      |
-| `GRANT ALL PRIVILEGES ON nom_de_bdd.* TO 'utilisateur'@'localhost';` | Accorder tous les privilèges à un utilisateur sur une base de données spécifique |
-| `FLUSH PRIVILEGES;`               | Appliquer les modifications des privilèges                                                  |
-| `SHOW GRANTS FOR 'utilisateur'@'localhost';` | Afficher les privilèges accordés à un utilisateur                                   |
-| `REVOKE ALL PRIVILEGES ON nom_de_bdd.* FROM 'utilisateur'@'localhost';` | Révoquer tous les privilèges d'un utilisateur sur une base de données spécifique |
-| `DROP USER 'utilisateur'@'localhost';` | Supprimer un utilisateur MySQL                                                    |
-| `DROP DATABASE nom_de_bdd;`       | Supprimer une base de données                                                               |
-
-
 ### Téléchargement de l'Archive d'Installation de GLPI
 
 Ici l'archive .tgz de GLPI contient tout ce qui est nécessaire pour installer et faire fonctionner le logiciel.
@@ -213,7 +196,7 @@ chown -R www-data /var/www/html/glpi
 Pour vous assurer que le changement de propriétaire a été effectué correctement, vous pouvez lister le contenu du répertoire : 
 
 ```bash
-ls -l /var/www/html
+ls -l /var/www/html/glpi
 ```
 
 ### Configuration de GLPI via l'interface Web 
@@ -234,7 +217,7 @@ Cliquer sur installer pour lancer le setup :
 
 ![installsetup](./img/installsetup.png)
 
-Étape importante : GLPI vérifie la configuration de votre serveur pour s'assurer que tous les prérequis sont remplis. Si tout est en ordre, vous verrez des coches vertes et pourrez continuer. Si des erreurs apparaissent, corrigez-les d'abord. Cliquez ensuite sur **Continuer** : 
+**Étape importante** : GLPI vérifie la configuration de votre serveur pour s'assurer que tous les prérequis sont remplis. Si tout est en ordre, vous verrez des coches vertes et pourrez continuer. Si des erreurs apparaissent, corrigez-les d'abord. Cliquez ensuite sur **Continuer** : 
 
 ![glpiverif](./img/glpiverif.png)
 
@@ -247,7 +230,7 @@ Cliquer sur installer pour lancer le setup :
 Si vous rencontrez une erreur, cela peut être dû à l'une des raisons suivantes : soit votre serveur MariaDB n'est pas configuré pour accepter les connexions à distance, soit votre utilisateur est configuré pour se connecter uniquement en localhost. Pour permettre les connexions à distance, configurez l'utilisateur en utilisant `%` à la place de `localhost`. Si cela ne fonctionne toujours pas, veuillez revoir attentivement les étapes du guide.
 :::
 
-Sélectionnez la base de données créée pour GLPI, et continuer:
+Sélectionnez la base de données créée pour GLPI, et continuer :
 
 ![configGLPI](./img/liendb.png)
 
