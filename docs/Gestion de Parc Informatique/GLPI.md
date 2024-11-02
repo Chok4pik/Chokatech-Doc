@@ -4,7 +4,15 @@ sidebar_position: 1
 
 ## Prérequis
 
-:::success
+:::info Privilèges Administrateur Requis !
+
+
+Les installations et manipulations décrites dans ce guide ont été effectuées avec des privilèges root.
+
+:::
+<!-- Ceci est un commentaire qui ne sera pas affiché
+
+:::info
 Avant de procéder à l'installation de GLPI, il est important de vérifier certains prérequis. Pour que GLPI fonctionne correctement, vous aurez besoin : 
 
 * Un serveur web (Apache)
@@ -18,7 +26,7 @@ Si vous possédez déjà un serveur LAMP, vous pouvez passer à l'étape suivant
 
 :::danger
 **Remarque :** La base de données peut être installée sur un serveur distinct en fonction de vos besoins.
-:::
+::: -->
 
 ## Introduction à GLPI
 
@@ -40,26 +48,19 @@ Aujourd'hui, GLPI constitue l’une des meilleures solutions de gestion de servi
 - **Gestion des licences** : Conforme aux bonnes pratiques ITIL pour une gestion efficace des licences.
 - **Plugins complémentaires** : Permettent d'étendre les fonctionnalités de base, y compris l'intégration avec des systèmes de monitoring.
 
-GLPI s'adresse à des parcs informatiques de toutes tailles, qu'ils soient grands, moyens ou petits. Grâce à son interface claire et intuitive, ce logiciel est conçu pour être utilisé par des professionnels de l'IT comme par des utilisateurs finaux.
+## Installation de la Base LAMP
+
+Dans cette étape, nous allons installer les composants nécessaires pour mettre en place notre serveur GLPI. Pour cela, nous aurons besoin de configurer la base LAMP, qui comprend Apache 2, PHP et MariaDB.
+
+1. **[Installation de LAMP](../Serveurs/Serveur%20LAMP.md)**
+2. **[Congiguraiton de la base de donnée](../Serveurs/Base%20de%20données.md)**
 
 ## Installtion  et configuration de GLPI sur Debian 
-
-:::danger
-Privilèges Administrateur Requis !
-
-Les installations et manipulations décrites dans ce guide ont été effectuées avec des privilèges root.
-
-Sur une distribution Debian, pour passer en mode administrateur et obtenir les privilèges root, exécutez la commande suivante :
-
-```bash
-su -
-```
-:::
 
 Mise à jour des paquets sur la machine Debian : 
 
 ```bash
-apt-get update && sudo apt-get upgrade
+apt-get update && apt-get upgrade
 ```
 
 ### Installation des extension PHP nécessaire pour GLPI
@@ -79,59 +80,6 @@ apt-get install php-ldap
 ```
 :::
 
-### Creation d'une base de données pour GLPI
-
-Connexion a MariaDB : 
-
-```bash
-mysql -u root -p
-```
-Création d'un utilisateur : 
-
-```sql
-CREATE USER 'glpi_adm'@'localhost' IDENTIFIED BY 'root';
-```
-
-
-Creation d'une base données nommé DB_glpi: 
-
-```sql
-CREATE DATABASE DB_glpi;
-```
-
-Accord des privilèges sur la nouvelle base de données à l'utilisateur:
-```sql
-GRANT ALL PRIVILEGES ON DB_glpi.* TO glpi_adm@localhost;
-```
-Accorde tous les privilèges sur la base de données `DB_glpi` à l'utilisateur `glpi_adm`
-qui se connecte depuis `localhost`.
-
-:::info
-Accordez les privilèges à l'utilisateur pour permettre les connexions à distance : 
-
-```sql
-CREATE USER 'glpi_adm'@'%' IDENTIFIED BY 'password';
-```
-
-```sql
-GRANT ALL PRIVILEGES ON DB_glpi.* TO 'glpi_adm'@'%';
-```
-
-Note : Utilisez '%' pour permettre les connexions depuis n'importe quelle adresse IP. Pour restreindre l'accès à une adresse IP spécifique, remplacez '%' par l'adresse IP du client.
-
-:::
-
-Appliquer les modifications des privilèges :
-
-```sql
-FLUSH PRIVILEGES;
-```
-
-Quitter MariaDB :
-
-```sql
-EXIT;
-```
 
 ### Téléchargement de l'Archive d'Installation de GLPI
 
@@ -197,6 +145,10 @@ Pour vous assurer que le changement de propriétaire a été effectué correctem
 
 ```bash
 ls -l /var/www/html/glpi
+```
+
+```bash
+systemctl restart apache2
 ```
 
 ### Configuration de GLPI via l'interface Web 

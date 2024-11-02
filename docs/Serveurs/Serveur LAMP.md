@@ -27,12 +27,6 @@ Un **CMS (Content Management System)** ou système de gestion de contenu, est un
 
 :::danger Privilèges Administrateur Requis !
 Les installations et manipulations décrites dans ce guide ont été effectuées avec des privilèges **root**. 
-
-Sur une distribution **Debian**, pour passer en mode administrateur et obtenir les privilèges root, exécutez la commande suivante :
-
-```bash
-su -
-``` 
 :::
 
 ### Installation d'apache 
@@ -62,7 +56,7 @@ http://192.168.1.107
 ```
 ![sucees apache2](./img/apache.png)
 
-### Installation de MariaDB/MySQL
+### Installation de MariaDB
 
 Installation du paquet de MariaDB : 
 
@@ -147,13 +141,14 @@ Test de connexion à la base de donées :
 ```bash
 mariadb -u root -p
 ```
-
+<!-- 
 ### Configuration de MariaDB/MySQL pour accepter les connexion à distance : 
 ```bash
 vim /etc/mysql/mariadb.conf.d/50-server.cnf
 ```
-![sucees phpinfo](./img/bind.png)
+![sucees phpinfo](./img/bind.png) 
 
+ -->
 
 ### Installation de PHP
 
@@ -167,6 +162,10 @@ Nous installerons aussi des packages supplémentaires pour que le code PHP fonct
 ```bash
 apt-get install -y php-pdo php-mysql php-zip php-gd php-mbstring php-curl php-xml php-pear php-bcmath
 ```
+
+:::info
+À partir de cette étape, les instructions suivantes seront considérées comme optionnelles.
+:::
 
 Pour vérifier que notre moteur de script PHP fonctionne, nous allons créer un fichier nommé "phpinfo.php" (ou un autre nom) à la racine de notre site Web : 
 

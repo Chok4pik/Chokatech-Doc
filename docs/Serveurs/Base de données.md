@@ -6,34 +6,30 @@ sidebar_position: 2
 
 Avant de commencer la configuration de votre base de données, assurez-vous que les prérequis suivants sont remplis :
 
-:::success
-* **Installation de MariaDB ou MySQL :**
-   - Vous devez avoir installé MariaDB ou MySQL sur votre serveur. Si ce n'est pas encore fait, veuillez suivre les instructions d'installation appropriées pour votre système d'exploitation.
+:::info
+* **Installation de MariaDB :**
+   - Vous devez avoir installé MariaDB sur votre serveur. Si ce n'est pas encore fait, veuillez suivre les instructions d'installation appropriées pour votre système d'exploitation.
 
-   Pour installer MariaDB, veuillez vous référer au [guide suivant ](/Chokatech-Doc/docs/Serveurs/Serveur%20LAMP#installation-de-mariadbmysql).
-
+   Pour installer MariaDB, veuillez vous référer au [guide suivant ](/Chokatech-Doc/docs/Serveurs/Serveur%20LAMP#installation-de-mariadb).
 :::
 
 Une fois ces prérequis vérifiés et la base de données installée, vous pourrez procéder à la configuration de votre base de données.
 
+## Étapes de Configuration
 
 ## Création et Gestion de Base de Données
 
 Ce guide explique comment configurer une base de données pour GLPI avec MariaDB/MySQL, y compris la création d'utilisateurs et les commandes essentielles.
 
----
+### Configuration de MariaDB pour accepter les connexion à distance :
 
-
-## Configuration de MariaDB/MySQL pour accepter les connexion à distance :
+Cette configuration va permettre d'accepter les connexions à distance depuis d'autres machines.
 
 ```bash
 vim /etc/mysql/mariadb.conf.d/50-server.cnf
 ```
 ![sucees phpinfo](./img/bind.png)
 
-
-
-## Étapes de Configuration
 
 ### Connexion à MariaDB :
 
@@ -42,44 +38,41 @@ Connectez-vous à MariaDB en tant qu’utilisateur `root` :
 ```bash
 mysql -u root -p
 ```
-### Création d'un Utilisateur
-
-Création d'un utilisateur nommé adm_DB :
-
-```sql
-CREATE USER 'adm_DB'@'localhost' IDENTIFIED BY 'root';
-```
 
 ### Création de la Base de Données : 
 
 ```sql
 CREATE DATABASE DB;
 ```
-### Accord de privilèges à l'utilisateur 
 
-Attribuez à l'utilisateur adm_DB  tous les privilèges sur la base de données DB pour une connexion depuis localhost :
+### Création d'un Utilisateur et attributions de privilèges :
 
-```sql
-GRANT ALL PRIVILEGES ON DB.* TO 'adm_DB'@'localhost';
-```
+- **Création d'un Utilisateur avec connexion à Distance :**
 
-### Permettre les Connexions à Distance
+   ```sql
+   CREATE USER 'adm_DB'@'%' IDENTIFIED BY 'root';
+   ```
 
-Pour autoriser les connexions de adm_DB depuis n'importe quelle adresse IP :
+   ```sql
+   GRANT ALL PRIVILEGES ON DB.* TO 'adm_DB'@'%';
+   ```
+   :::info
+   Remarque : Utilisez % pour autoriser les connexions depuis toutes les adresses IP, ou remplacez % par une adresse IP spécifique pour restreindre l’accès.
+   :::
 
-```sql
-CREATE USER 'adm_DB'@'%' IDENTIFIED BY 'root';
-```
+   L'utilisateur créé 'adm_DB'@'%' pourra se connecter depuis n'importe quelle adresse IP.
 
-```sql
-GRANT ALL PRIVILEGES ON DB.* TO 'adm_DB'@'%';
-```
+- **Création d'un Utilisateur Local avec Privilèges :**
 
-:::info
+   ```sql
+   CREATE USER 'adm_DB'@'localhost' IDENTIFIED BY 'root';
+   ```
 
-Remarque : Utilisez % pour autoriser les connexions depuis toutes les adresses IP, ou remplacez % par une adresse IP spécifique pour restreindre l’accès.
+   ```sql
+   GRANT ALL PRIVILEGES ON DB.* TO 'adm_DB'@'localhost';
+   ```
+   L'utilisateur créé 'adm_DB'@'localhost' se connectera uniquement depuis la machine locale.
 
-:::
 
 ### Appliquer les Modifications des Privilèges :
 
@@ -92,6 +85,11 @@ FLUSH PRIVILEGES;
 ```sql
 EXIT;
 ```
+Redémarrer le serveur MariaDB :
+
+```bash
+systemctl restart mariadb.service 
+ ```
 
 ## Commandes Indispensables pour Gérer une Base de Données et ses Utilisateurs
 
