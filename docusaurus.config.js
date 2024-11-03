@@ -89,7 +89,6 @@ const config = {
             position: 'left',
             label: 'Tutoriels',
           },
-          {to: '/blog', label: 'Articles', position: 'left'},
           { to: '/Chokatech-Doc/aboutme', label: 'À propos de moi', position: 'left' }, // Lien vers la page About 
           {
             href: 'https://github.com/facebook/docusaurus',

@@ -1,6 +1,7 @@
 import React from 'react';
 import './aboutme.css'; // Assurez-vous que ce chemin est correct
 import profileImage from './img/photo.png'; // Ajustez le chemin selon l'emplacement
+import CVFile from './img/CV_alternance.pdf'; // Importez le fichier PDF
 
 const ProfileCard = () => {
   return (
@@ -25,13 +26,13 @@ const ProfileCard = () => {
           alt="user"
         />
         <div className="card-details">
-          <h3>Byaeere Abdoul</h3>          
+          <h3>Bayere Abdoul</h3>          
           <p>
             Etudiant en 2 année de BTS SIO option SISR
           </p>
           <div className="buttons">
-            <button className="primary">Prtfolio</button>
-            <button className="primary ghost">CV</button>
+          <a href='https://chok4pik.github.io/new-portfolio.github.io/#home' target="_blank" ><button className="primary">Portfolio</button></a>
+          <a href={CVFile} target="_blank" ><button className="primary ghost">CV</button></a>
           </div>
           <div className="skills">
             <h3>Ce que je recherche :</h3>
@@ -40,7 +41,7 @@ const ProfileCard = () => {
 
               Je suis actuellement à la recherche d'une alternance pour ma troisième année en licence professionnelle zen informatique. Je suis passionné par mon domaine d'études et je souhaite acquérir une expérience pratique qui me permettra de développer mes compétences.<br /><br />
 
-              Pour en savoir plus sur mon profil, n'hésitez pas à consulter mon CV. Si vous êtes intéressé par mon parcours et mes compétences. De plus, si vous connaissez des personnes qui cherchent des stagiaires, n'hésitez pas à partager cette information autour de vous. 
+              Pour en savoir plus sur mon profil, n'hésitez pas à consulter mon CV et mon portfolio. Si vous êtes intéressé par mon parcours et mes compétences. De plus, si vous connaissez des personnes qui cherchent des stagiaires, n'hésitez pas à partager cette information autour de vous. 
 
               <br /><br />
               Cela m'aiderait beaucoup. Merci !!!
