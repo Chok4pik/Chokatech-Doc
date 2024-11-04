@@ -13,7 +13,7 @@ Un **serveur LAMP** est un ensemble de logiciels qui crée un environnement perm
 * **MySQL** : le système de gestion de bases de données
 * **PHP** : le langage de programmation pour générer du contenu dynamique
 
-### Qu'est-ce qu'un CMS ?
+#### Qu'est-ce qu'un CMS ?
 
 Un **CMS (Content Management System)** ou système de gestion de contenu, est une application web qui permet aux utilisateurs de créer, gérer, et modifier du contenu sur un site web, sans nécessiter de compétences avancées en programmation. Ces plateformes facilitent la création et la gestion de sites dynamiques, car elles offrent des interfaces intuitives pour éditer du texte, ajouter des images, organiser des pages, et bien plus encore.
 
@@ -271,11 +271,4 @@ J’ai utilisé un utilisateur root, mais il vaut mieux créer un utilisateur s�
 
 
 🎉 **Le serveur est maintenant prêt !** 🚀  
-
-Vous êtes à un pas de déployer votre CMS.
-
-Pour commencer, rendez-vous sur la [page WordPress](../Solutions-Web-et-Documentation/Wordpress.md).
-
-Ou bien, rendez-vous sur la [page Dokuwiki](../Solutions-Web-et-Documentation/Dokuwiki.md).
-
 

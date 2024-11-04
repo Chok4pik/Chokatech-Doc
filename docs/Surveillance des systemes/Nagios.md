@@ -4,7 +4,7 @@ sidebar_position: 1
 
 ## Introduction à Nagios
 
-Nagios, connu sous le nom de Nagios Core, est un logiciel de surveillance qui permet de contrôler les systèmes, les réseaux et l'infrastructure IT. Bien qu'il ait été initialement développé pour Linux, Nagios fonctionne également sur diverses autres variantes d'Unix. Cet outil fournit des services de surveillance et d'alerte pour différents composants, tels que les serveurs, les commutateurs et les applications. Lorsqu'un incident se produit, Nagios notifie les utilisateurs et leur envoie également un avis lorsque le problème est résolu.
+Nagios Core est un logiciel de surveillance open-source, sous licence GNU-GPL, qui permet de surveiller l'état des systèmes, des réseaux et des infrastructures informatiques. Il est conçu pour alerter les administrateurs lorsqu'un service ou un hôte ne fonctionne pas correctement, ce qui est crucial pour assurer la disponibilité et la performance des systèmes. Nagios peut fonctionner nativement sur des systèmes de type Unix, mais peut également être utilisé sur des systèmes d'exploitation Windows via un logiciel de machine virtuelle.
 
 #### Fonctionnalités clés de Nagios
 
@@ -18,23 +18,18 @@ Nagios, connu sous le nom de Nagios Core, est un logiciel de surveillance qui pe
 
 5. **Extensibilité avec des plugins** : Supporte des plugins personnalisés pour surveiller des services ou dispositifs spécifiques selon les besoins.
 
-6. **Reporting et visualisation** : Fournit des rapports détaillés et des graphiques pour analyser la performance et les historiques des incidents.
-
-
-## Prérequis
-
-:::success
+:::info Prérequis
 Pour mener à bien ce tutoriel, assurez-vous de disposer des éléments suivants :
 
-- **Deux serveurs** (un pour le serveur Nagios et un pour l’hôte à surveiller) avec accès root
-- Une **connaissance basique des commandes Linux**
-- **Serveur Web** : Apache
+- **Serveur Web :** Apache
+- **PHP**
+- **Plugins Nagios :** Un ensemble de plugins Nagios pour la surveillance des services.
 :::
 
 ## Installation de Nagios 
 
-:::danger
-**Attention :** Dans ce guide, nous allons installer **Nagios Core**, qui est la version gratuite du logiciel. Veuillez ne pas installer Nagios XI, la version payante, car ce tutoriel se concentre uniquement sur Nagios Core.
+:::danger Attention
+Dans ce guide, nous allons installer **Nagios Core**, qui est la version gratuite du logiciel. Veuillez ne pas installer Nagios XI, la version payante, car ce tutoriel se concentre uniquement sur Nagios Core.
 :::
 
 Mise à jour des paquets sur la machine Debian : 
@@ -50,14 +45,7 @@ apt install -y build-essential apache2 php openssl perl make php-gd libgd-dev li
 
 On télécharge les fichiers d’installation de Nagios Core :
 
-
-:::info
-La version de Nagios Core que nous allons déployer dans ce guide est celle la plus récente disponible au moment de sa rédaction. Pour obtenir la dernière version de Nagios Core, vous pouvez visiter les dépôts de [releases sur GitHub](https://github.com/NagiosEnterprises/nagioscore/releases) ou consulter [le site officiel de Nagios](https://assets.nagios.com/downloads/nagioscore/versions.php).
-:::
-
-:::danger
-**Attention à l'utilisation d'un proxy :**
-
+:::danger Attention à l'utilisation d'un proxy
 Avant d'installer l'archive de Nagios, il est crucial de vérifier si votre organisation utilise un proxy pour les connexions Internet. Si tel est le cas, vous devez configurer votre fichier de configuration `wget` pour référencer le proxy de l'organisation.
 
 * Modifiez le fichier `/etc/wgetrc` :
@@ -66,6 +54,10 @@ Avant d'installer l'archive de Nagios, il est crucial de vérifier si votre orga
    ```bash
    vim /etc/wgetrc
    ```
+:::
+
+:::info
+La version de Nagios Core que nous allons déployer dans ce guide est celle la plus récente disponible au moment de sa rédaction. Pour obtenir la dernière version de Nagios Core, vous pouvez visiter les dépôts de [releases sur GitHub](https://github.com/NagiosEnterprises/nagioscore/releases) ou consulter [le site officiel de Nagios](https://assets.nagios.com/downloads/nagioscore/versions.php).
 :::
 
 ```bash
@@ -98,7 +90,7 @@ Compilation du programme et des interfaces web (CGI) :
 make all
 ```
 
-Création d’un groupe et un utilisateur :
+Création d’un groupe et d'un utilisateur :
 
 ```bash
 make install-groups-users
@@ -116,9 +108,14 @@ make install-webconf
 a2enmod rewrite
 a2enmod cgi
 ```
-Activation de la Surveillance des Serveurs Distants dans /usr/local/nagios/etc/nagios.cfg : 
+###  Activation de la Surveillance des Serveurs Distants dans nagios.cfg : 
 
 Pour permettre à Nagios de surveiller les serveurs distants, il est nécessaire de modifier le fichier de configuration nagios.cfg en supprimant le commentaire de la ligne suivante : 
+
+
+```bash
+vim /usr/local/nagios/etc/nagios.cfg
+```
 
 ```bash
 cfg_dir=/usr/local/nagios/etc/servers
@@ -173,6 +170,13 @@ Installation des plugins :
 ```bash
 make install
 ```
+
+Vérification de la présence des plugin dans le dossier libexec : 
+
+```bash
+ls /usr/local/nagios/libexec/
+```
+
 Vérification de la configuration :
 
 ```bash
@@ -207,8 +211,6 @@ http://IP_serveur/nagios
 ## Configuration des Plugins de Surveillance à Distance
 
 :::info
-
-Avant de commencer, nous allons devoir installé les plugins suivants sur les serveurs que vous souhaitez surveiller :
 - **NRPE (Nagios Remote Plugin Executor)** : pour la surveillance des systèmes Linux/Unix.
 - **NSClient++** : pour la surveillance des serveurs Windows.
 :::
@@ -229,7 +231,7 @@ NSClient++ est un agent conçu pour la surveillance des systèmes Windows et per
 - **Utilisation des ressources système** : collecte des informations sur l'utilisation du CPU, de la mémoire et du disque.
 - **Logs d'événements** : permet de surveiller les logs d'événements pour détecter les erreurs ou avertissements.
 
-### Installation et configuration de NRPE sur le serveur Debian
+### Installation et configuration de NRPE sur le serveur Nagios
 
 ```bash
 cd /tmp
@@ -260,11 +262,11 @@ Résumer de la configuration :
 
 ![alt text](./img/nrpe_config.png)
 
-Finalisation de l'Installation : Création des Groupes, Utilisateurs et Installation des Fichiers
+Finalisation de l'Installation : (Création des Groupes, Utilisateurs et Installation des Fichiers)
 
 ```bash
  make all
- make install-groups-users
+ make install-groups-users  # si sa na pas été fait auparavant
  make install
  make install-config
 ```
@@ -312,7 +314,7 @@ Ce changement active les arguments de commande, permettant des configurations NR
 
 Vérification des Commandes NRPE :
 
-**Assurez-vous que les commandes NRPE ne sont pas commentées**  
+**Assurez-vous que les commandes NRPE ne sont pas commentées :**  
    Dans le fichier `/etc/nagios/nrpe.cfg`ou `/usr/local/nagios/etc/nrpe.cfg` certaines commandes de vérification doivent être actives pour permettre la surveillance des services de base.
 
    - Ouvrez le fichier de configuration :
@@ -323,11 +325,11 @@ Vérification des Commandes NRPE :
 
    - Vérifiez que les lignes suivantes ne sont pas commentées (c'est-à-dire sans le caractère `#` au début) :
      ```bash
-     command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10
-     command[check_load]=/usr/lib/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
-     command[check_hda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/hda1
-     command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z
-     command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200
+     command[check_users]=/usr/local/nagios/libexec/check_users -w 5 -c 10 
+     command[check_load]=/usr/local/nagios/libexec/check_load -r -w .15,.10,.05 -c .30,.25,.20 
+     command[check_hda1]=/usr/local/nagios/libexec/check_disk -w 20% -c 10% -p /dev/hda1 
+     command[check_zombie_procs]=/usr/local/nagios/libexec/check_procs -w 5 -c 10 -s Z 
+     command[check_total_procs]=/usr/local/nagios/libexec/check_procs -w 150 -c 200
      ```
 
    Ces commandes sont utilisées pour surveiller les services de base comme les utilisateurs, la charge du système, l’espace disque, les processus zombies, et le nombre total de processus.
@@ -357,7 +359,7 @@ vim /usr/local/nagios/etc/servers/GLPI.cfg
     - On va commencer par définir l'hôte à surveiller : 
     
     ```bash
-     Nagios Host configuration file template
+     # Nagios Host configuration file template
         define host {
             use                          linux-server
             host_name                    mtr-ubuntu
@@ -451,18 +453,7 @@ vim /usr/local/nagios/etc/servers/GLPI.cfg
 
         ```
 
-
-
-
-
-
-
 ## Installation et configuration de NRPE sur une cliente/serveur Debian
-:::danger
-
-L'emplacement des fichiers et de la configuration de NRPE (Nagios Remote Plugin Executor) varie selon le type d'installation effectué. Si NRPE est installé via des gestionnaires de paquets comme apt, les fichiers se trouvent généralement dans des emplacements standards, tels que /etc/nagios/nrpe.cfg pour la configuration et /usr/lib/systemd/system/nrpe.service pour le script de démarrage. En revanche, si NRPE est installé à partir des sources, les fichiers se situent souvent sous /usr/local/nagios/, avec le fichier de configuration à /usr/local/nagios/etc/nrpe.cfg. Dans ce dernier cas, il n'y a pas toujours de script de démarrage par défaut, nécessitant parfois la création manuelle d'un service systemd. Il est donc essentiel de connaître la méthode d'installation utilisée pour localiser correctement les fichiers et configurer NRPE de manière appropriée.
-
-:::
 
 installation de  NRPE : 
  
@@ -473,8 +464,9 @@ apt update
 ```bash
 apt install nagios-nrpe-server nagios-plugins
 ```
+Cette commande installera nagios-nrpe-server pour exécuter les commandes NRPE et les plugins Nagios de base pour les vérifications.
 
-COnfiguration de nrpe.cfg pour définir a qui envoyer les données (le serveur ) : 
+Configuration de nrpe.cfg pour définir a qui envoyer les données (le serveur ) : 
 
 ```bash
 vim /etc/nagios/nrpe.cgf
@@ -485,20 +477,15 @@ allowed_hosts=127.0.0.1,IP_serveur
 ```bash
 systemctl restart nagios-nrpe-server
 ```
+### Vérificaiton de la connectivité entre le serveur et l'hôte à surveiller
 
 Vérification de la connexion NRPE depuis le serveur Nagios:
-
-
-```bash
-systemctl restart nrpe
-```
-
 
 ```bash
 /usr/local/nagios/libexec/check_nrpe -H <ip_machine>
 ```
 
-La réponse NRPE v4.1.0 indique que le service NRPE est correctement installé et fonctionne sur la machine distante.
+La réponse **NRPE v4.1.0** indique que le service NRPE est correctement installé et fonctionne sur la machine distante.
 
 Vérification de la configuration coté serveur Nagios: 
 

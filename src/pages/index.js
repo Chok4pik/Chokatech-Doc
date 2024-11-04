@@ -25,7 +25,7 @@ export default function Home() {
                 <div
                   className={styles.avatarName}
                 >
-                  Chokatech
+                  Choco-Doc
                 </div>
                 <div style={{ marginBottom: '10px' }} /> {/* Espace supplémentaire */}
                 <small className={styles.avatarSubtitle}>

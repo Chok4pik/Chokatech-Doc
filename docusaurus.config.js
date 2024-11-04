@@ -8,7 +8,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Chokatech',
+  title: 'Techsplosion',
   tagline: '',
   favicon: 'img/choco1.png',
 
@@ -76,7 +76,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Chokatech',
+        title: 'Choco-Doc',
         logo: {
           alt: 'My Site Logo',
           src: 'img/choco1.png',
