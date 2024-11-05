@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import styles from './page-garde.module.css';
 import Link from '@docusaurus/Link';
 import profileImage from './img/animeicespice.png'; // Ajustez le chemin selon l'emplacement
+import image from './img/linux.jpeg' ;
 
 export default function Home() {
   return (
@@ -16,7 +17,7 @@ export default function Home() {
               <Link to="/Chokatech-Doc/aboutme"> 
                 <img
                   className={clsx('avatar__photo', styles.avatarPhoto)}
-                  src={profileImage}
+                  src={image}
                   alt="icespice"
                   style={{ width: '300px', height: '300px' }}
                 />
