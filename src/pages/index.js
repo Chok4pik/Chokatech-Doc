@@ -4,7 +4,7 @@ import clsx from 'clsx';
 import styles from './page-garde.module.css';
 import Link from '@docusaurus/Link';
 import profileImage from './img/animeicespice.png'; // Ajustez le chemin selon l'emplacement
-import image from './img/linux.jpeg' ;
+import image from './img/linuxhat.jpeg' ;
 
 export default function Home() {
   return (
@@ -14,7 +14,7 @@ export default function Home() {
         <div className={styles.rectangle}>
           <section className={styles.avatarSection}>
             <div className="avatar avatar--vertical">
-              <Link to="/Chokatech-Doc/aboutme"> 
+              <Link> 
                 <img
                   className={clsx('avatar__photo', styles.avatarPhoto)}
                   src={image}
@@ -26,7 +26,7 @@ export default function Home() {
                 <div
                   className={styles.avatarName}
                 >
-                  Choco-Doc
+                  DocuLogie
                 </div>
                 <div style={{ marginBottom: '10px' }} /> {/* Espace supplémentaire */}
                 <small className={styles.avatarSubtitle}>

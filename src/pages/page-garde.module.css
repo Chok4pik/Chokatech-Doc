@@ -48,7 +48,7 @@ body {
 }
 
 .avatarPhoto:hover {
-    transform: scale(1.1) rotate(10deg); /* Rotation sur le survol */
+    transform: scale(1.1) ; /* Rotation sur le survol */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 

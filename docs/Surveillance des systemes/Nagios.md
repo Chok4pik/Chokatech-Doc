@@ -469,7 +469,7 @@ Cette commande installera nagios-nrpe-server pour exécuter les commandes NRPE e
 Configuration de nrpe.cfg pour définir a qui envoyer les données (le serveur ) : 
 
 ```bash
-vim /etc/nagios/nrpe.cgf
+vim /etc/nagios/nrpe.cfg
 ```
 ```bash
 allowed_hosts=127.0.0.1,IP_serveur

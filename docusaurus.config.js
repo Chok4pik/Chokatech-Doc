@@ -76,7 +76,7 @@ const config = {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'Choco-Doc',
+        title: 'DocuLogie',
         logo: {
           alt: 'My Site Logo',
           src: 'img/choco1.png',
@@ -89,7 +89,7 @@ const config = {
             position: 'left',
             label: 'Tutoriels',
           },
-          { to: '/Chokatech-Doc/aboutme', label: 'À propos de moi', position: 'left' }, // Lien vers la page About 
+          //{ to: '/Chokatech-Doc/aboutme', label: 'À propos de moi', position: 'left' },  Lien vers la page About //
           {
             href: 'https://github.com/facebook/docusaurus',
             label: 'GitHub',
