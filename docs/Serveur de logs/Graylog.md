@@ -35,16 +35,16 @@ Si pas de proxy alors :
 
 
 ```bash
-curl -fsSL https://www.mongodb.org/static/pgp/server-8.0.asc | gpg -o /usr/share/keyrings/mongodb-server-8.0.gpg --dearmor
+curl -fsSL https://www.mongodb.org/static/pgp/server-6.0.asc | gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg --dearmor
 ```
 
 Vérifaction de l'ajout de la clé : 
 
 ```bash
-ls -l /usr/share/keyrings/mongodb-server-8.0.gpg
+ls -l /usr/share/keyrings/mongodb-server-6.0.gpg
 ```
 ```bash
-cat /usr/share/keyrings/mongodb-server-8.0.gpg
+cat /usr/share/keyrings/mongodb-server-6.0.gpg
 ```
 ![cle](./img/clepublique.png)
 
@@ -54,14 +54,13 @@ Ajoute du dépôt MongoDB à la liste des sources APT sur Debian
 Pour Debian 12 : 
 
 ```bash
-vim /etc/apt/sources.list.d/mongodb-org-8.0.list
+vim /etc/apt/sources.list.d/mongodb-org-6.0.list
 ```
-
-Rajouter cette ligne :
 
 ```bash
-echo "deb [ signed-by=/usr/share/keyrings/mongodb-server-8.0.gpg ] http://repo.mongodb.org/apt/debian bookworm/mongodb-org/8.0 main" | tee /etc/apt/sources.list.d/mongodb-org-8.0.list
+echo "deb http://repo.mongodb.org/apt/debian bookworm/mongodb-org/6.0 main" | tee /etc/apt/sources.list.d/mongodb-org-6.0.list
 ```
+
 
 ```bash
 apt-get update

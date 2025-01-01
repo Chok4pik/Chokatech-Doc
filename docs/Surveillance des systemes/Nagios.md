@@ -126,12 +126,6 @@ Puis, créez un répertoire serveur :
 mkdir -p /usr/local/nagios/etc/servers
 ```
 
-On redémarre le service Apache :
-
-```bash
-systemctl restart apache2
-```
-
 Création du Mot de Passe Administrateur pour l'Interface Web de Nagios : 
 
 ```bash
@@ -142,7 +136,6 @@ htpasswd -c /usr/local/nagios/etc/htpasswd.users nagiosadmin
 
 :::info
 La version des plugins Nagios que nous allons télécharger dans ce guide est la plus récente disponible au moment de sa rédaction. Pour obtenir les derniers plugins, vous pouvez visiter lles dépôts de [ releases sur GitHub](https://github.com/nagios-plugins/nagios-plugins/releases).
-
 :::
 
 ```bash
@@ -194,6 +187,10 @@ On lance le service Nagios :
 ```bash
 systemctl start nagios
 ```
+```bash
+systemctl restart apache2
+```
+
 Accès à l'Interface Web de Nagios via un Navigateur : 
 
 **Login pour se connecter :**
@@ -262,15 +259,14 @@ Résumer de la configuration :
 
 ![alt text](./img/nrpe_config.png)
 
-Finalisation de l'Installation : (Création des Groupes, Utilisateurs et Installation des Fichiers)
+Finalisation de l'Installation : 
 
 ```bash
  make all
- make install-groups-users  # si sa na pas été fait auparavant
  make install
  make install-config
 ```
-Mise à Jour des Fichiers de Services : Configuration du Port pour Nagios et NRPE : 
+Mise à Jour des Fichiers de Services (Configuration du Port pour Nagios et NRPE) : 
 
 :::info
 Pour éxécuter ces commendes il faut des droit admin
@@ -296,7 +292,7 @@ Ouvrez le fichier de configuration NRPE avec un éditeur de texte :
 ```bash
  vim /usr/local/nagios/etc/nrpe.cfg
 ```
-Trouvez la ligne commençant par allowed_hosts et ajoutez l'adresse IP de votre serveur Nagios après 127.0.0.1. Par exemple :
+Trouvez la ligne commençant par allowed_hosts et ajoutez l'adresse IP de votre serveur Nagios après 127.0.0.1 :
 
 ```bash
  allowed_hosts=127.0.0.1,10.25.5.2
@@ -351,109 +347,8 @@ En cas de problème vérifier le journal des logs :
 ```bash
 journalctl -xe -u nrpe
 ```
-Création du fichier de configuration définissant la machines et les services à surveiller : 
 
-```bash
-vim /usr/local/nagios/etc/servers/GLPI.cfg
-```
-    - On va commencer par définir l'hôte à surveiller : 
-    
-    ```bash
-     # Nagios Host configuration file template
-        define host {
-            use                          linux-server
-            host_name                    mtr-ubuntu
-            alias                        Ubuntu Host
-            address                      192.168.1.6
-            register                     1
-        }
-    ```
-    - Puis on rajoute les differents service à surveiller : 
-
-        ```bash
-                    define service {
-            host_name                       mtr-ubuntu
-            service_description             PING
-            check_command                   check_ping!100.0,20%!500.0,60%
-            max_check_attempts              2
-            check_interval                  2
-            retry_interval                  2
-            check_period                    24x7
-            check_freshness                 1
-            contact_groups                  admins
-            notification_interval           2
-            notification_period             24x7
-            notifications_enabled           1
-            register                        1
-        }
-
-        define service {
-            host_name                       mtr-ubuntu
-            service_description             Check Users
-            check_command           check_local_users!20!50
-            max_check_attempts              2
-            check_interval                  2
-            retry_interval                  2
-            check_period                    24x7
-            check_freshness                 1
-            contact_groups                  admins
-            notification_interval           2
-            notification_period             24x7
-            notifications_enabled           1
-            register                        1
-        }
-
-        define service {
-            host_name                       mtr-ubuntu
-            service_description             Local Disk
-            check_command                   check_local_disk!20%!10%!/
-            max_check_attempts              2
-            check_interval                  2
-            retry_interval                  2
-            check_period                    24x7
-            check_freshness                 1
-            contact_groups                  admins
-            notification_interval           2
-            notification_period             24x7
-            notifications_enabled           1
-            register                        1
-        }
-
-        define service {
-            host_name                       mtr-ubuntu
-            service_description             Check SSH
-            check_command                   check_ssh
-            max_check_attempts              2
-            check_interval                  2
-            retry_interval                  2
-            check_period                    24x7
-            check_freshness                 1
-            contact_groups                  admins
-            notification_interval           2
-            notification_period             24x7
-            notifications_enabled           1
-            register                        1
-        }
-
-        define service {
-            host_name                       mtr-ubuntu
-            service_description             Total Process
-            check_command                   check_local_procs!250!400!RSZDT
-            max_check_attempts              2
-            check_interval                  2
-            retry_interval                  2
-            check_period                    24x7
-            check_freshness                 1
-            contact_groups                  admins
-            notification_interval           2
-            notification_period             24x7
-            notifications_enabled           1
-            register                        1
-        }
-
-        ```
-
-## Installation et configuration de NRPE sur une cliente/serveur Debian
+### Installation et configuration de NRPE sur un serveur Debian
 
 installation de  NRPE : 
  
@@ -477,7 +372,63 @@ allowed_hosts=127.0.0.1,IP_serveur
 ```bash
 systemctl restart nagios-nrpe-server
 ```
-### Vérificaiton de la connectivité entre le serveur et l'hôte à surveiller
+### Création du Fichier de Configuration pour la Surveillance des serveurs 
+
+:::info étapes a éffecuter sur le serveur
+:::
+
+```bash
+vim /usr/local/nagios/etc/servers/GLPI.cfg
+```
+On va commencer par définir l'hôte à surveiller : 
+    
+    ```bash
+    define host {
+        use                 linux-server        
+        host_name           serveur1
+        alias               Serveur Web Principal   
+        address             192.168.1.230
+        }
+    ```
+Puis on rajoute les differents service à surveiller : 
+
+- Espace disque : 
+
+    On va commencer par définir la commande check_disk dans le fichier /etc/nagios/nrpe.cfg du serveur Linux à surveiller : 
+
+        ```bash
+        command[check_disk]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p / -u GB
+        ```
+    
+    Sur le serveur nagios dans le fichier GLPI.cfg on definit un service à surveillé : 
+
+    ```bash
+    define service {
+        use                 generic-service
+        host_name           MariaDB
+        service_description Espace DB
+        check_command       check_nrpe!check_disk
+        }
+    ```
+
+    Enfin on defnit les commande check disk et check nrpe dans le fichier /usr/local/nagios/etc/objects/commands.cfg : 
+
+    ```bash
+    define command {
+        command_name    check_nrpe
+        command_line    /usr/local/nagios/libexec/check_nrpe -H $HOSTADDRESS$ -c $ARG1$
+        }
+
+    define command {
+        command_name    check_disk
+        command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c check_disk
+        } 
+    ```
+
+
+
+
+## Vérificaiton de la connectivité entre le serveur et l'hôte à surveiller
 
 Vérification de la connexion NRPE depuis le serveur Nagios:
 
@@ -510,5 +461,56 @@ Vérificaiton de la présence du serveur à surveiller :
     ![alt text](./img/hostnagios.png)
 
  - Dans services
+    ![alt text](./img/espacedisk.png) 
+    
+                                    
+## Autre sercvices à surveillé sur serveur linux
 
-    ![alt text](./img/servicenagios.png)
+**SSH** (Vérification de la disponibilité du service SSH) :
+
+Configuration du nrpe.cfg sur le serveur distant : 
+
+```bash
+command[check_ssh]=/usr/lib/nagios/plugins/check_ssh -H localhost
+```
+Configuration commands.cfg sur le serveur Nagios : 
+
+```bash
+    define command {
+        command_name    check_ssh_nrpe
+        command_line    $USER1$/check_nrpe -H $HOSTADDRESS$ -c check_ssh 
+        }
+```
+Configuration du service dans Nagios : 
+
+```bash
+define service {
+    use                      generic-service
+    host_name                mon_serveur_ssh
+    service_description      SSH
+    check_command            check_nrpe!check_sshd
+    }
+```
+## Installation et configuration de NSClient++
+
+:::info étapes effectuer sur un serveur/client windows
+:::
+
+:::info
+La version des plugins Nagios que nous allons télécharger dans ce guide est la plus récente disponible au moment de sa rédaction. Pour obtenir les derniers plugins, vous pouvez visiter lles dépôts de [ releases sur GitHub](https://github.com/mickem/nscp/releases).
+:::
+
+![alt text](./img/nsclient.png)
+
+
+![alt text](./img/generic.png)
+
+![alt text](./img/typical.png)
+
+Ajout de l'addressse IP du serveur Nagios : 
+
+![alt text](./img/ip_nagios.png)
+
+![alt text](./img/install_nsclient.png)
+
+![alt text](./img/fin_nsclient.png)
